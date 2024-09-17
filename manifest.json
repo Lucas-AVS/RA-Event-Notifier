@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "description": "A Chrome extension for tracking events, challenges, and achievements on RetroAchievements with notifications and score management.",
+    "name": "RA Event Notifier",
+    "version": "1.0.0",
+    "background": {
+      "service_worker": "service_worker.js",
+      "type": "module"
+    },
+    "action": {
+      "default_popup": "index.html"
+    },
+    "permissions": [
+      "scripting"
+    ],
+    "host_permissions": [
+      "http://*/*",
+      "https://*/*"
+    ]
+}
