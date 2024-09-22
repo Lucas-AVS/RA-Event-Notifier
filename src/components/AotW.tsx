@@ -1,35 +1,22 @@
 import AchievementBadge from './AchievBadge';
 import GameInfo from './GameInfo';
+import TimeLeft from './TimeLeft';
+import { AotWConfig } from '../assets/types';
+import './style/AotW.css'
 
-interface AotWConfig {
-  achievement: {
-    id: number;
-    title: string;
-    description: string;
-    points: number;
-    trueRatio: number;
-    author: string;
-    dateCreated: string;
-    dateModified: string;
-    badgeName: string;
-    badgeUrl: string;
-}
-  game: {
-    id: number; title: string;
-  };
-  consoleId: number;
-} 
 
-const AotW = ({ achievement, game, consoleId }:AotWConfig) => {
+const AotW = ({ achievement, console, startAt, game}:AotWConfig) => {
   return (
-    <div className="component">
-      <h3>Achievement of the Week</h3>
-      <div className="bg-embed p-4 rounded border border-embed-highlight">
-        <AchievementBadge achievement={achievement} />
-        <hr className="border-embed-highlight mt-2 mb-3" />
-        <GameInfo game={game} consoleId={consoleId} />
-      </div>
+  <div className="aotw">
+    <h3 className="aotw-title">Achievement of the Week</h3>
+    <div className="aotw-content">
+      <AchievementBadge achievement={achievement} />
+      <div className="aotw-divider" />
+      <GameInfo game={game} console={console} />
     </div>
+      <TimeLeft startAt={startAt} />
+  </div>
+
   );
 };
 
