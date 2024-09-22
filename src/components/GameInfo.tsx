@@ -1,36 +1,44 @@
+import { GameExtended } from '@retroachievements/api';
+import './style/GameInfo.css';
+
 interface AotWConfig {
-  game: {
-    id: number; title: string;
-  };
-  consoleId: number;
-} 
+  console: { id: number; title: string };
+  game: GameExtended | null;
+}
 
-const GameInfo = ({ game, consoleId }:AotWConfig) => {
+const GameInfo = ({ console, game }: AotWConfig) => {
+  if (game === null) {
+    return <p className="game-title">Failed to fetch game data</p>;
+  }
+
   return (
-    <div className="gap-x-2 flex relative">
-      <a
-        href={`https://retroachievements.org/game/${game.id}`}
-      >
+    <div className="game-info">
+      <a href={`https://retroachievements.org/game/${game.id}`}>
         <img
-          src={`https://media.retroachievements.org/Images/084628.png`}
+          src={`https://media.retroachievements.org/${game.imageIcon}`}
           alt="Achievement of the week game badge"
-          width="32"
-          height="32"
-          className="w-8 h-8"
+          className="game-badge"
         />
-        <p className="absolute max-w-fit pl-4 top-[-4px] left-6 font-semibold mb-0.5 text-xs">
-          {game.title}
-          <span className="tag">
-            <span>Hack</span>
-          </span>
-        </p>
       </a>
-
-      <div>
-        <a href={`https://retroachievements.org/gameList.php?c=${consoleId}`} className="flex items-center gap-x-1 -mt-1">
-          <img src={`https://static.retroachievements.org/assets/images/system/nes.png`} width="18" height="18" alt="Console icon" />
-          <span className="block text-xs tracking-tighter">NES/Famicom</span>
+      <div className="game-console">
+      <p className="game-title">
+          {game.title}
+          {/* future type of game feature
+          <span className="game-tag">
+            {customGame}
+          </span> */}
+        </p>
+        <div className="console-info">
+        <a href={`https://retroachievements.org/gameList.php?c=${console.id}`} className="console-link">
+          <img
+            src={`https://static.retroachievements.org/assets/images/system/nes.png`} //static image, get each console image latter
+            width="18"
+            height="18"
+            alt="Console icon"
+            />
+          <span className="console-name">{console.title}</span>
         </a>
+        </div>
       </div>
     </div>
   );
