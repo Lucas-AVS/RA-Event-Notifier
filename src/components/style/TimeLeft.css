@@ -1,0 +1,10 @@
+.time-left {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--blue50);
+}
+  
+.time-left.urgent {
+  color: #a82323;
+}

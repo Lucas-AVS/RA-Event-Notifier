@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './style/TimeLeft.css'
 
 interface StartAtConfig {
     startAt: string;
@@ -6,6 +7,7 @@ interface StartAtConfig {
 
 function TimeLeft({ startAt }: StartAtConfig) {
     const [timeLeft, setTimeLeft] = useState<string>("");
+    const [isTimeShort, setIsTimeShort] = useState<boolean>(false);
 
     const startDateToEndData = (dateString: string): Date => {
         const date = new Date(dateString);
@@ -25,8 +27,16 @@ function TimeLeft({ startAt }: StartAtConfig) {
             const seconds = Math.floor((difference / 1000) % 60);
 
             setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+
+            // Se faltar menos de 24 horas
+            if (difference < 24 * 60 * 60 * 1000) {
+                setIsTimeShort(true); // Marca que o tempo está quase acabando
+            } else {
+                setIsTimeShort(false); // Tempo maior que 24h, então reseta o estado
+            }
         } else {
             setTimeLeft("Time's up! Awaiting for the new AotW...");
+            setIsTimeShort(false); // Tempo acabou, reseta o estado
         }
     };
 
@@ -40,7 +50,9 @@ function TimeLeft({ startAt }: StartAtConfig) {
     }, [startAt]);
 
     return (
-        <p>Time left: {timeLeft}</p>
+        <div className={isTimeShort ? "time-left urgent" : "time-left"}>
+            <p>Time left: {timeLeft}</p>
+        </div>
     );
 }
 
