@@ -1,0 +1,23 @@
+.aotw-title {
+    color: var(--blue50);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--blue50);
+    padding-bottom: 0.5rem;
+}
+
+.aotw-content {
+    width: 200px;
+    padding: 1rem;
+    background-color: var(--black90);
+    border-radius: 0.5rem;
+    border: 1px solid var(--black70);
+}
+  
+.aotw-divider {
+    border: 1px solid var(--black70);
+    border-bottom: 0px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+  
